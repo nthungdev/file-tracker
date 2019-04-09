@@ -19,7 +19,8 @@ function scanDirs() {
       console.log("Start: " + file);
       fs.stat(file, generate_callback(file));
       fs.stat(file, function(err, stats) {
-        if (stats.isDirectory()) console.log("Directory");
+        if (stats.isDirectory()) {
+        }
       });
     }
   });
