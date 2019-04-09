@@ -37,9 +37,22 @@ body {
   position: absolute;
   right: 0px;
   background-color: #3ad29f;
-  height: inherit;
   padding: 10px 15px;
   top: 50%;
   transform: translateY(-50%);
   border-radius: 30px;
+}
+
+.list-button {
+  margin: 10px 15px;
+  border: none;
+  background-color: #3ad29f;
+  padding: 10px 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 30px;
+}
+
+.third-row {
+  display: grid;
 }

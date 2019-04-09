@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/nthungdev/file-tracker#readme",
   "dependencies": {
-    "electron": "^4.1.4"
+    "electron": "^4.1.4",
+    "sqlite3": "^4.0.6"
   }
 }

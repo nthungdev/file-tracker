@@ -53,12 +53,13 @@ def saveSnapshot(address, createdDate, fileType):
     _conn.commit()
 
 
-# def main():
-#     cleanDatabase()
-#     initDatabase()
-#     getSnapshots()
-#     saveSnapshot("Users/john/", datetime.datetime.now(), "file")
-#     _c.close()
+def main():
+    # cleanDatabase()
+    initDatabase()
+    getSnapshots()
+    # saveSnapshot("Users/john/", datetime.datetime.now(), "file")
+    _c.close()
 
 
-# main()
+main()
+#
