@@ -44,9 +44,14 @@ function getFilePathsInDir(path) {
   return dirs;
 }
 
+function getFileNameAndFilePath(path) {
+  let result;
+  for (let i = path.length; i > -1; i--) {}
+}
+
 /// Return a Stats object of the file
 function getFileStats(path) {
-  var path = "C:\\Users\\vuaga\\Desktop\\oshw\\file-tracker";
+  // var path = "C:\\Users\\vuaga\\Desktop\\oshw\\file-tracker";
   return fs.lstatSync(path);
 }
 
@@ -77,5 +82,6 @@ function generate_callback(file) {
 
 // var db = openDatabase("mydb", "1.0", "my first database", 2 * 1024 * 1024);
 // console.log(db);
-path = "C:\\Users\\vuaga\\Desktop\\file-tracker";
+path = "C:\\Users\\vuaga\\Desktop\\file-tracker\\package-lock.json";
+// console.log(getFilePathsInDir(path));
 console.log(getFileStats(path));
