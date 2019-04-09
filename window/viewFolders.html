@@ -7,11 +7,12 @@
   <body>
     <div class="super-container">
       <div class = "first-row">
-        <div id = "demo" class = "filepath-container"></div>
-        <input type="file" id="inputfile" onchange = "dirPath()" webkitdirectory/>
-        <button onclick = "scanDirs()">Search</button>
+        <div id = "demo" class = "filepath-container">FilePath...</div>
+        <input type="file" id="inputfile" onchange = "dirPath()" webkitdirectory class= "select-file-button"/>
+        <label for = "inputfile" class = "fake-select-button">Select Directory</label>
       </div>
       <div class = "second-row">
+      <button onclick = "scanDirs()">Search</button>
         
       </div>
       <div class="third-row">

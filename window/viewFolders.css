@@ -7,4 +7,39 @@
 
 body {
   text-align: center;
+  background-color: #f7f7f7;
+}
+
+.first-row {
+  background-color: white;
+  border: none;
+  width: 600px;
+  border-radius: 30px;
+  -webkit-box-shadow: 3px 3px 99px rgba(55, 150, 244, 0.3);
+  -moz-box-shadow: 3px 3px 99px rgba(55, 150, 244, 0.3);
+  box-shadow: 3px 3px 99px rgba(55, 150, 244, 0.3);
+  margin: 30px auto;
+  text-align: left;
+  font-weight: lighter;
+  padding: 10px 15px;
+  position: relative;
+}
+
+.filepath-container {
+  display: inline-block;
+}
+
+.select-file-button {
+  display: none;
+}
+
+.fake-select-button {
+  position: absolute;
+  right: 0px;
+  background-color: #3ad29f;
+  height: inherit;
+  padding: 10px 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 30px;
 }

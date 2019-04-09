@@ -20,6 +20,14 @@ function scanDirs() {
       fs.stat(file, generate_callback(file));
       fs.stat(file, function(err, stats) {
         if (stats.isDirectory()) {
+          secondary_path = file + "/";
+          fs.readdir(secondary_path, function(secondary_err, secondary_items) {
+            for (var j = 0; j < secondary_items.length; j++) {
+              var secondary_file = secondary_path + "/" + secondary_items[j];
+              console.log("Secondary: " + secondary_file);
+              fs.stat(secondary_file, generate_callback(secondary_file));
+            }
+          });
         }
       });
     }
