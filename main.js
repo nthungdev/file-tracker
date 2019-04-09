@@ -11,4 +11,11 @@ app.on("ready", function() {
   // Create new window
   mainWindow = new BrowserWindow({});
   // Load html into window
+  mainWindow.loadURL(
+    url.format({
+      pathname: path.join(__dirname, "window/mainWindow.html"),
+      protocol: "file:",
+      slashes: true
+    })
+  );
 });
