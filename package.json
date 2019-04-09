@@ -1,0 +1,25 @@
+{
+  "name": "file-tracker",
+  "version": "1.0.0",
+  "description": "A GUI application of our best selling app, file-tracker v0.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nthungdev/file-tracker.git"
+  },
+  "keywords": [
+    "file-tracker"
+  ],
+  "author": "Swornim Barahi and Hung Nguyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nthungdev/file-tracker/issues"
+  },
+  "homepage": "https://github.com/nthungdev/file-tracker#readme",
+  "dependencies": {
+    "electron": "^4.1.4"
+  }
+}
