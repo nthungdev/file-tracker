@@ -1,7 +1,7 @@
 {
   "name": "file-tracker",
   "version": "1.0.0",
-  "description": "A GUI application of our best selling app, file-tracker v0.",
+  "description": "A GUI version of our best selling app, file-tracker v0.",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
