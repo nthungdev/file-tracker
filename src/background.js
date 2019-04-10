@@ -57,6 +57,7 @@ app.on("ready", () => {
 
   ipcMain.on("get-folder-path", (event, arg) => {
     console.log("from background.js");
+    console.log("folderPath: " + folderPath);
     event.sender.send("folder-path", folderPath);
   });
 

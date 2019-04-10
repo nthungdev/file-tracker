@@ -1,7 +1,7 @@
 var sqlite3 = require("sqlite3").verbose();
 
 const createTable = () => {
-  let db = new sqlite3.Database("database.db");
+  let db = new sqlite3.Database("./database.db");
   db.serialize(() => {
     db.run(`
         CREATE TABLE IF NOT EXISTS Snapshots (
@@ -22,6 +22,7 @@ const createTable = () => {
   db.close();
 };
 
+/// Use getFileStatsInDir() to get list of FileStats
 function insertSnapshotWithFileStats(fileStats, callback) {
   let db = new sqlite3.Database("database.db");
   let query = "INSERT INTO Snapshots VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -107,7 +108,7 @@ function getAllSnapshots(callback) {
 
 const getSnapshotInDir = (path, callback = rows => {}) => {
   let db = new sqlite3.Database("database.db");
-  let newPath = path + "\\%";
+  let newPath = path + "%";
   let query = "SELECT * FROM Snapshots WHERE filePath LIKE ?";
   db.serialize(() => {
     db.all(query, newPath, (err, rows) => {
@@ -169,7 +170,7 @@ createTable();
 //   }
 // );
 
-// getAllSnapshot(rows => {
+// getAllSnapshots(rows => {
 //   console.log(rows);
 // });
 

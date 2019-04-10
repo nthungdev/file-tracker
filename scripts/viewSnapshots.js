@@ -1,5 +1,5 @@
 const db = require("../scripts/database");
-var dir = require("../scripts/directories");
+const dir = require("../scripts/directories");
 
 // DOM SELECTORs //////////////////////////////////////////////////////////
 const backButton = document.querySelector("div.viewSnapshots--pathBar-back");
@@ -29,18 +29,24 @@ let folderPath;
 let hasSavedSnapshot;
 
 console.log(1);
-db.getAllSnapshots(rows => {
-  console.log(rows);
-});
+// db.getAllSnapshots(rows => {
+//   console.log("getAllSnapshots");
+//   console.log(rows);
+// });
+// console.log(2);
 
 function init() {
   ipcRenderer.send("get-folder-path");
 
-  // console.log("in view snapshot");
-  // console.log(folderPath);
+  console.log("init ");
+  console.log("folderPath: " + folderPath);
 }
 
 init();
+
+function viewAllSnapshot() {
+  db.getAllSnapshots(rows => console.log(rows));
+}
 
 function loadSavedSnapshots() {
   console.log("loadSavedSnapshots");
@@ -48,8 +54,10 @@ function loadSavedSnapshots() {
 
   if (folderPath) {
     console.log(4);
+    console.log("folderPath: " + folderPath);
     // let fileStats = dir.getFileStatsInDir(folderPath);
     db.getSnapshotInDir(folderPath, rows => {
+      console.log("rows: " + rows);
       console.log(rows.length === 0 ? "none" : rows);
       if (rows.length === 0) {
         hasSavedSnapshot = false;

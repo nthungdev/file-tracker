@@ -27,6 +27,16 @@ body {
 
 .filepath-container {
   display: inline-block;
+  border: none;
+  width: 450px;
+}
+
+.filepath-container:diabled {
+  background: white;
+}
+
+input[type="text"]:disabled {
+  background: white;
 }
 
 .select-file-button {

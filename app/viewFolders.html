@@ -7,7 +7,14 @@
   <body>
     <div class="super-container">
       <div class="first-row">
-        <div id="demo" class="filepath-container">FilePath...</div>
+        <!-- <div id="demo" class="filepath-container">FilePath...</div> -->
+        <input
+          type="text"
+          id="demo"
+          class="filepath-container"
+          disabled
+          value="Select a directory"
+        />
         <input
           type="file"
           id="inputfile"
@@ -38,7 +45,7 @@
           <div id="file-size" class="file-size">Size (in bytes)</div>
         </div>
       </div>
-      <button class="save-button" onclick="addTableElement()">
+      <button class="save-button" onclick="saveSnapshot()">
         Save Snapshot
       </button>
       <a href="./viewSnapshots.html">
@@ -47,6 +54,6 @@
         </button>
       </a>
     </div>
-    <script type="text/javascript" src="../scripts/directories.js"></script>
+    <script type="text/javascript" src="../scripts/viewFolders.js"></script>
   </body>
 </html>

@@ -76,24 +76,16 @@ function getFileStatsInDir(path, searchInSubdirectories = false) {
 
   files = fs.readdirSync(path);
   for (var i = 0; i < files.length; i++) {
-    let filePath = path + "/" + files[i];
-
-    // console.log(filePath);
+    let filePath = path + "\\" + files[i];
     fileStats.push(getFileStats(filePath));
 
-    // console.log(getInSubdirectories);
-    // console.log(fs.statSync(filePath).isDirectory());
-
     if (searchInSubdirectories && fs.statSync(filePath).isDirectory()) {
-      // console.log("innerFiles");
       innerFiles = fs.readdirSync(filePath);
-      // console.log(innerFiles);
 
       try {
         for (var j = 0; i < innerFiles.length; j++) {
-          let innerFilePath = filePath + "/" + innerFiles[j];
+          let innerFilePath = filePath + "\\" + innerFiles[j];
           fileStats.push(getFileStats(innerFilePath));
-          // filePaths.push(getFileStats(filePath));
         }
       } catch (error) {
         console.log(error);
@@ -184,7 +176,7 @@ path2 =
   "C:\\Users\\vuaga\\OneDrive - plattsburgh.edu\\PERSONAL\\COLLEGE\\Courses\\CSC433";
 // console.log(getFilePathsInDir(path));
 
-console.log(getFileStatsInDir(path2, true));
+// console.log(getFileStatsInDir(path2, true));
 
 // console.log(getFileStats(path));
 // console.log(getFileNameAndFilePath(path));
@@ -232,5 +224,6 @@ module.exports = {
   getFileStatsInDir,
   getFilePathsInDir,
   scanDirs,
-  dirPath
+  dirPath,
+  getFileCredentials
 };
