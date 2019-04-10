@@ -1,6 +1,7 @@
 // const electron = require("electron");
 // const { ipcRenderer } = electron;
 
+// import { addTableElement } from "./scripts";
 let fs = require("fs");
 
 function dirPath() {
@@ -204,6 +205,7 @@ function addTableElement(file) {
   }</div></div>`;
   document.getElementById("third-row").appendChild(fileElement);
 }
+
 // export {
 //   getFileStats,
 //   getFileStatsInDir,
