@@ -6,28 +6,40 @@
   </head>
   <body>
     <div class="super-container">
-      <div class = "first-row">
-        <div id = "demo" class = "filepath-container">FilePath...</div>
-        <input type="file" id="inputfile" onchange = "dirPath()" webkitdirectory class= "select-file-button"/>
-        <label for = "inputfile" class = "fake-select-button">Select Directory</label>
+      <div class="first-row">
+        <div id="demo" class="filepath-container">FilePath...</div>
+        <input
+          type="file"
+          id="inputfile"
+          onchange="dirPath()"
+          webkitdirectory
+          class="select-file-button"
+        />
+        <label for="inputfile" class="fake-select-button"
+          >Select Directory</label
+        >
       </div>
 
-      <div class = "second-row">
-        <button onclick = "scanDirs()" class = "list-button">List Primary Files Only</button>
-        <button onclick = "" class = "list-button">List Sub-Directories as well</button>
+      <div class="second-row">
+        <button onclick="scanDirs()" class="list-button">
+          List Primary Files Only
+        </button>
+        <button onclick="" class="list-button">
+          List Sub-Directories as well
+        </button>
       </div>
 
-      <div id = "third-row" class="third-row">
-        <div id = "file-entries" class = "file-entries">
-          <div id= "filepath" class= "filepath">Filename </div>
-          
-          <div id = "perms" class= "perms">Permissions</div>
-          <div id = "mod-date" class= "mod-date">Date Modified</div>
-          <div id = "file-size" class= "file-size">Size</div>    
+      <div id="third-row" class="third-row">
+        <div id="file-entries" class="file-entries">
+          <div id="filepath" class="filepath">Filename</div>
+
+          <div id="perms" class="perms">Permissions</div>
+          <div id="mod-date" class="mod-date">Date Modified</div>
+          <div id="file-size" class="file-size">Size</div>
         </div>
       </div>
       <button class="save-button">
-        Save Snapshot 
+        Save Snapshot
       </button>
       <button class="save-button" onclick="addTableElement()">
         View SnapShots

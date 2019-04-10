@@ -121,6 +121,7 @@ body {
 .file-entries {
   display: flex;
   border-bottom: #cccccc 1px solid;
+  border-top: #cccccc 1px solid;
 }
 
 .third-row .file-entries:nth-child(2n + 2) {

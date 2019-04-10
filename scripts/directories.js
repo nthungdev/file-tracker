@@ -1,5 +1,6 @@
 // const electron = require("electron");
 // const { ipcRenderer } = electron;
+
 let fs = require("fs");
 
 function dirPath() {
@@ -199,9 +200,14 @@ function addTableElement(file) {
   }</div><div class = ${"perms"}>${(file[2] & 0o777).toString(
     8
   )}</div><div class = ${"mod-date"}>${file[6]}</div><div>${
-    file[3]
+    file[1]
   }</div></div>`;
   document.getElementById("third-row").appendChild(fileElement);
 }
-
-export { getFileStats, getFileStatsInDir, getFilePathsInDir };
+// export {
+//   getFileStats,
+//   getFileStatsInDir,
+//   getFilePathsInDir,
+//   scanDirs,
+//   dirPath
+// };
