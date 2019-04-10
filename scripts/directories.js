@@ -6,53 +6,133 @@ function dirPath() {
   document.getElementById("demo").innerHTML = document.getElementById(
     "inputfile"
   ).files[0].path;
-  console.log(document.getElementById("inputfile").files[0].path);
 }
 
 function scanDirs() {
-  var fs = require("fs");
+  const fs = require("fs");
   path = document.getElementById("demo").innerHTML;
   console.log(path);
   fs.readdir(path, function(err, items) {
-    for (var i = 0; i < items.length; i++) {
-      var file = path + "/" + items[i];
-
-      console.log("Start: " + file);
-      fs.stat(file, generate_callback(file));
-      fs.stat(file, function(err, stats) {
-        if (stats.isDirectory()) {
-        }
-      });
+    for (let i = 0; i < items.length; i++) {
+      let file = path + "\\" + items[i];
+      console.log(getFileCredentials(file));
     }
   });
 }
 
 /// Return an array of file path in the directory path
-function getFilePathsInDir(path) {
-  let dirs = [];
-  let fs = require("fs");
+function getFilePathsInDir(path, searchInSubdirectories = false) {
+  let filePaths = [];
 
   files = fs.readdirSync(path);
   for (var i = 0; i < files.length; i++) {
-    let file = path + "/" + files[i];
+    let filePath = path + "/" + files[i];
 
-    console.log(file);
-    dirs.push(file);
+    // console.log(filePath);
+    filePaths.push(filePath);
+
+    // console.log(getInSubdirectories);
+    // console.log(fs.statSync(filePath).isDirectory());
+
+    if (searchInSubdirectories && fs.statSync(filePath).isDirectory()) {
+      // console.log("innerFiles");
+      innerFiles = fs.readdirSync(filePath);
+      // console.log(innerFiles);
+
+      try {
+        for (var j = 0; i < innerFiles.length; j++) {
+          let innerFilePath = filePath + "/" + innerFiles[j];
+          filePaths.push(innerFilePath);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 
-  console.log(dirs);
-  return dirs;
+  console.log(filePaths);
+  return filePaths;
+}
+
+function getFileStatsInDir(path, searchInSubdirectories = false) {
+  let fileStats = [];
+
+  files = fs.readdirSync(path);
+  for (var i = 0; i < files.length; i++) {
+    let filePath = path + "/" + files[i];
+
+    // console.log(filePath);
+    fileStats.push(getFileStats(filePath));
+
+    // console.log(getInSubdirectories);
+    // console.log(fs.statSync(filePath).isDirectory());
+
+    if (searchInSubdirectories && fs.statSync(filePath).isDirectory()) {
+      // console.log("innerFiles");
+      innerFiles = fs.readdirSync(filePath);
+      // console.log(innerFiles);
+
+      try {
+        for (var j = 0; i < innerFiles.length; j++) {
+          let innerFilePath = filePath + "/" + innerFiles[j];
+          fileStats.push(getFileStats(innerFilePath));
+          // filePaths.push(getFileStats(filePath));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
+  return fileStats;
+}
+
+// Return the name of the file in the given path
+function getFileName(path) {
+  let result;
+  for (let i = path.length; i > -1; i--) {
+    if (path[i] === "\\") {
+      result = path.slice(i + 1, path.length);
+      return result;
+    }
+  }
+  return result;
+}
+
+// Return the name of the parent folder of the file in the given path
+function getFileParent(path) {
+  let result;
+  for (let i = path.length; i > -1; i--) {
+    if (path[i] === "\\") {
+      result = path.slice(0, i);
+      return result;
+    }
+  }
+  return result;
 }
 
 function getFileNameAndFilePath(path) {
-  let result;
-  for (let i = path.length; i > -1; i--) {}
+  let result = [];
+  for (let i = path.length; i > -1; i--) {
+    if (path[i] === "\\") {
+      result.push(path.slice(0, i));
+      result.push(path.slice(i + 1, path.length));
+      return result;
+    }
+  }
+  return result;
 }
 
-/// Return a Stats object of the file
+/// Return a fileStat object of the file
 function getFileStats(path) {
-  // var path = "C:\\Users\\vuaga\\Desktop\\oshw\\file-tracker";
-  return fs.lstatSync(path);
+  //var path = "C:\\Users\\vuaga\\Desktop\\oshw\\file-tracker";
+  return {
+    ...fs.statSync(path),
+    isDirectory: fs.statSync(path).isDirectory(),
+    filePath: path,
+    fileName: getFileName(path)
+  };
+  return fs.statSync(path);
 }
 
 function getFilesInDir(path) {
@@ -82,6 +162,33 @@ function generate_callback(file) {
 
 // var db = openDatabase("mydb", "1.0", "my first database", 2 * 1024 * 1024);
 // console.log(db);
-path = "C:\\Users\\vuaga\\Desktop\\file-tracker\\package-lock.json";
+path = "C:\\Users\\vuaga\\Desktop";
+path2 =
+  "C:\\Users\\vuaga\\OneDrive - plattsburgh.edu\\PERSONAL\\COLLEGE\\Courses\\CSC433";
 // console.log(getFilePathsInDir(path));
-console.log(getFileStats(path));
+
+console.log(getFileStatsInDir(path2, true));
+
+// console.log(getFileStats(path));
+// console.log(getFileNameAndFilePath(path));
+// console.log(getFileName(path));
+// console.log(getFileParent(path));
+// scanDirs();
+
+function getFileCredentials(filename) {
+  const dirent = new fs.Dirent(filename);
+  const stats = fs.statSync(filename);
+  return [
+    stats.size,
+    stats.mode,
+    stats.uid,
+    stats.gid,
+    stats.atime,
+    stats.mtime,
+    stats.ctime,
+    stats.birthtime,
+    stats.isDirectory()
+  ];
+}
+
+export { getFileStats, getFileStatsInDir, getFilePathsInDir };

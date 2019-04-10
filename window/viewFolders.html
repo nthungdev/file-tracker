@@ -7,17 +7,26 @@
   <body>
     <div class="super-container">
       <div class = "first-row">
-        <div id = "demo" class = "filepath-container"></div>
-        <input type="file" id="inputfile" onchange = "dirPath()" webkitdirectory/>
-        <button onclick = "scanDirs()">Search</button>
+        <div id = "demo" class = "filepath-container">FilePath...</div>
+        <input type="file" id="inputfile" onchange = "dirPath()" webkitdirectory class= "select-file-button"/>
+        <label for = "inputfile" class = "fake-select-button">Select Directory</label>
       </div>
+
       <div class = "second-row">
-        
+        <button onclick = "scanDirs()" class = "list-button">List Primary Files Only</button>
+        <button onclick = "" class = "list-button">List Sub-Directories as well</button>
       </div>
+
       <div class="third-row">
+        <div id = "table-rows">
+
+        </div>
+      </div>
+      
+      <div class="fourth-row">
       
       </div>
     </div>
-    <script src="./jsfiles/directories.js"></script>
+    <script src="../scripts/directories.js"></script>
   </body>
 </html>
