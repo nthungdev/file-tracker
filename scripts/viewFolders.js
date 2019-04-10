@@ -19,15 +19,36 @@ function addTableElement(file) {
   document.getElementById("third-row").appendChild(fileElement);
 }
 
-function scanDirs() {
+function loadMetadata() {
+  scanDirs();
+}
+
+function loadMetadataSub() {
+  scanDirs(true);
+}
+
+function scanDirs(checkSubdirectories = false) {
   // TODO clear the list before addTableElement
   path = document.getElementById("demo").getAttribute("value");
   console.log(path);
   fs.readdir(path, function(err, items) {
     for (let i = 0; i < items.length; i++) {
       let file = path + "\\" + items[i];
-      console.log(dir.getFileCredentials(file));
-      addTableElement(dir.getFileCredentials(file));
+
+      let fileCredential = dir.getFileCredentials(file);
+      console.log(fileCredential);
+      addTableElement(fileCredential);
+
+      if (checkSubdirectories && fileCredential[9]) {
+        console.log("got to 2nd loop");
+        fs.readdir(fileCredential[0], function(err, items) {
+          for (let i = 0; i < items.length; i++) {
+            let file = path + "\\" + items[i];
+            console.log(dir.getFileCredentials(fileCredential[0]));
+            addTableElement(dir.getFileCredentials(fileCredential[0]));
+          }
+        });
+      }
     }
   });
 }
