@@ -35,16 +35,18 @@
 
           <div id="perms" class="perms">Permissions</div>
           <div id="mod-date" class="mod-date">Date Modified</div>
-          <div id="file-size" class="file-size">Size   (in bytes)</div>
+          <div id="file-size" class="file-size">Size (in bytes)</div>
         </div>
       </div>
-      <button class="save-button">
+      <button class="save-button" onclick="addTableElement()">
         Save Snapshot
       </button>
-      <button class="save-button" onclick="addTableElement()">
-        View SnapShots
-      </button>
+      <a href="./viewSnapshots.html">
+        <button class="save-button" id="viewSnapshotsButton">
+          View Snapshots
+        </button>
+      </a>
     </div>
-    <script type = "text/javascript" src="../scripts/directories.js"></script>
+    <script type="text/javascript" src="../scripts/directories.js"></script>
   </body>
 </html>

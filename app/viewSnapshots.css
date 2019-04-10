@@ -5,6 +5,12 @@
   font-size: 1em;
 }
 
+a,
+a:hover,
+a:visited {
+  text-decoration: none;
+}
+
 .viewSnapshots {
   display: flex;
   flex-direction: column;

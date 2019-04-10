@@ -12,11 +12,11 @@ const createTable = () => {
         gid string NOT NULL,
         size integer NOT NULL,
         isDirectory boolean NOT NULL,
-        lastAccess integer NOT NULL,
-        lastModified integer NOT NULL,
-        creationDate integer NOT NULL,
+        atimeMs integer NOT NULL,
+        mtimeMs integer NOT NULL,
+        birthtimeMs integer NOT NULL,
         snapshotDate integer NOT NULL,
-        PRIMARY KEY (creationDate, filePath)
+        PRIMARY KEY (birthtimeMs, filePath)
     )`);
   });
   db.close();
@@ -105,7 +105,7 @@ function getAllSnapshots(callback) {
   db.close();
 }
 
-const getSnapshotInDir = (path, callback) => {
+const getSnapshotInDir = (path, callback = rows => {}) => {
   let db = new sqlite3.Database("database.db");
   let newPath = path + "\\%";
   let query = "SELECT * FROM Snapshots WHERE filePath LIKE ?";
@@ -173,7 +173,16 @@ createTable();
 //   console.log(rows);
 // });
 
-export {
+// export {
+//   insertSnapshotWithFileStats,
+//   convertToList,
+//   createTable,
+//   insertSnapshot,
+//   getAllSnapshots,
+//   getSnapshotInDir
+// };
+
+module.exports = {
   insertSnapshotWithFileStats,
   convertToList,
   createTable,

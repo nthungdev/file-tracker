@@ -1,5 +1,7 @@
 // const electron = require("electron");
-// const { ipcRenderer } = electron;
+const { ipcRenderer } = require("electron");
+
+var filePath;
 
 // import { addTableElement } from "./scripts";
 let fs = require("fs");
@@ -8,7 +10,19 @@ function dirPath() {
   document.getElementById("demo").innerHTML = document.getElementById(
     "inputfile"
   ).files[0].path;
+
+  const { ipcRenderer } = require("electron");
+  // DOM SELECTORs
+  const backButton = document.querySelector("button.viewSnapshotsButton");
+  filePath = document.querySelector("#demo");
+
+  // console.log(filePath.innerHTML);
+  ipcRenderer.send("folder-path-middleware", filePath.innerHTML);
 }
+
+// ipcRenderer.on("folder-path", (event, arg) => {
+//   console.log(arg);
+// });
 
 function scanDirs() {
   const fs = require("fs");
@@ -206,7 +220,14 @@ function addTableElement(file) {
   document.getElementById("third-row").appendChild(fileElement);
 }
 
-export {
+// export {
+//   getFileStats,
+//   getFileStatsInDir,
+//   getFilePathsInDir,
+//   scanDirs,
+//   dirPath
+// };
+module.exports = {
   getFileStats,
   getFileStatsInDir,
   getFilePathsInDir,

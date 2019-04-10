@@ -13,20 +13,14 @@
       <h1>Snapshots</h1>
 
       <div class="viewSnapshots--pathBar">
-        <div class="viewSnapshots--pathBar-back" onclick="showStat()">
-          <p>Back</p>
-        </div>
+        <a href="viewFolders.html">
+          <div class="viewSnapshots--pathBar-back">
+            <p>Back</p>
+          </div>
+        </a>
 
-        <script>
-          function showStat() {
-            let path = "C:Users\\vuagaDesktop\\file-tracker";
-            var dir = require("../scripts/directories");
-
-            console.log(dir.getFileStats(path));
-          }
-        </script>
         <div class="viewSnapshots--pathBar-container">
-          <p class="viewSnapshots--stats-snapshots-section-header">file path</p>
+          <p class="viewSnapshots--pathBar-container-folder-path">file path</p>
         </div>
       </div>
 
@@ -43,23 +37,23 @@
             </p>
             <div class="viewSnapshots--stats-snapshots-section-column">
               <p class="viewSnapshots--stats-snapshots-section-column-data">
-                File dsadasda asdasd dasd2 dw2e dsd3 dse3
+                File dsadasda s asdasd dasd2 dw2e dsd3 dse3
               </p>
             </div>
           </div>
-          <div id="filePath" class="viewSnapshots--stats-snapshots-section">
+          <!-- <div id="filePath" class="viewSnapshots--stats-snapshots-section">
             <p class="viewSnapshots--stats-snapshots-section-header">
               File path
             </p>
             <div class="viewSnapshots--stats-snapshots-section-column">
               <p class="viewSnapshots--stats-snapshots-section-column-data">
-                File dsadasda asdasd
+                File dsadasda 1 asdasd
               </p>
             </div>
-          </div>
+          </div> -->
           <div id="size" class="viewSnapshots--stats-snapshots-section">
             <p class="viewSnapshots--stats-snapshots-section-header">
-              File size
+              File size (bytes)
             </p>
             <div class="viewSnapshots--stats-snapshots-section-column"></div>
           </div>
@@ -89,9 +83,7 @@
               File name
             </p>
             <div class="viewSnapshots--stats-snapshots-section-column">
-              <p class="viewSnapshots--stats-snapshots-section-column-data">
-                File dsadasda asdasd
-              </p>
+              <p class="viewSnapshots--stats-snapshots-section-column-data"></p>
             </div>
           </div>
           <div class="viewSnapshots--stats-snapshots-section">
@@ -99,9 +91,7 @@
               File name
             </p>
             <div class="viewSnapshots--stats-snapshots-section-column">
-              <p class="viewSnapshots--stats-snapshots-section-column-data">
-                File dsadasda asdasd
-              </p>
+              <p class="viewSnapshots--stats-snapshots-section-column-data"></p>
             </div>
           </div>
           <div class="viewSnapshots--stats-snapshots-section">
