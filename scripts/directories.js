@@ -1,6 +1,7 @@
 // const electron = require("electron");
 // const { ipcRenderer } = electron;
 
+// import { addTableElement } from "./scripts";
 let fs = require("fs");
 
 function dirPath() {
