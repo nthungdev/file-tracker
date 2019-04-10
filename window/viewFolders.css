@@ -44,6 +44,8 @@ body {
 }
 
 .list-button {
+  cursor: pointer;
+  outline: none;
   margin: 10px 15px;
   border: none;
   background-color: #3ad29f;
@@ -51,8 +53,87 @@ body {
   top: 50%;
   transform: translateY(-50%);
   border-radius: 30px;
+  -webkit-box-shadow: 3px 3px 99px rgba(55, 150, 244, 0.3);
+  -moz-box-shadow: 3px 3px 99px rgba(55, 150, 244, 0.3);
+  box-shadow: 3px 3px 99px rgba(55, 150, 244, 0.3);
 }
 
 .third-row {
+  position: relative;
+  padding: 5px;
+  border-radius: 5px;
   display: grid;
+  margin: auto;
+  width: 1000px;
+  height: 60vh;
+  background-color: white;
+  -webkit-box-shadow: 3px 3px 99px rgba(55, 150, 244, 0.3);
+  -moz-box-shadow: 3px 3px 99px rgba(55, 150, 244, 0.3);
+  box-shadow: 3px 3px 99px rgba(55, 150, 244, 0.3);
+  overflow-y: scroll;
 }
+
+.save-button {
+  margin: 15px 0px 0px 900px;
+  border: none;
+  background-color: #3ad29f;
+  padding: 10px 15px;
+  border-radius: 30px;
+  -webkit-box-shadow: 3px 3px 99px rgba(55, 150, 244, 0.3);
+  -moz-box-shadow: 3px 3px 99px rgba(55, 150, 244, 0.3);
+  box-shadow: 3px 3px 99px rgba(55, 150, 244, 0.3);
+  outline: none;
+  cursor: pointer;
+}
+
+.filepath,
+.perms,
+.mod-date,
+.file-size {
+  display: inline-flex;
+  margin: none;
+  border-right: #3ad29f 1px solid;
+}
+
+.filepath {
+  text-align: left;
+  width: 300px;
+  overflow-x: auto;
+}
+
+.filepath::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+.perms {
+  width: 100px;
+  text-align: right;
+}
+
+.mod-date {
+  width: 300px;
+}
+
+.file-size {
+  width: 250px;
+}
+
+.file-entries {
+  display: flex;
+  border-bottom: #cccccc 1px solid;
+}
+
+.third-row .file-entries:nth-child(2n + 2) {
+  background-color: #3ad29f;
+}
+/* 
+.divider {
+  position: absolute;
+  height: 60vh;
+
+  top: 0px;
+  right: -1px;
+  width: 2px;
+
+  background-color: black;
+} */

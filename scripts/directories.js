@@ -16,6 +16,7 @@ function scanDirs() {
     for (let i = 0; i < items.length; i++) {
       let file = path + "\\" + items[i];
       console.log(getFileCredentials(file));
+      addTableElement(getFileCredentials(file));
     }
   });
 }
@@ -74,9 +75,9 @@ path = "C:\\Users\\vuaga\\Desktop\\file-tracker";
 console.log(getFileStats(path));
 
 function getFileCredentials(filename) {
-  const dirent = new fs.Dirent(filename);
   const stats = fs.statSync(filename);
   return [
+    filename,
     stats.size,
     stats.mode,
     stats.uid,
@@ -87,4 +88,16 @@ function getFileCredentials(filename) {
     stats.birthtime,
     stats.isDirectory()
   ];
+}
+
+function addTableElement(file) {
+  let fileElement = document.createElement("DIV");
+  fileElement.innerHTML = `<div class = ${"file-entries"}><div class = ${"filepath"}>${
+    file[0]
+  }</div><div class = ${"perms"}>${(file[2] & 0o777).toString(
+    8
+  )}</div><div class = ${"mod-date"}>${file[6]}</div><div>${
+    file[3]
+  }</div></div>`;
+  document.getElementById("third-row").appendChild(fileElement);
 }

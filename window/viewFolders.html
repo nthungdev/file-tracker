@@ -17,15 +17,21 @@
         <button onclick = "" class = "list-button">List Sub-Directories as well</button>
       </div>
 
-      <div class="third-row">
-        <div id = "table-rows">
-
+      <div id = "third-row" class="third-row">
+        <div id = "file-entries" class = "file-entries">
+          <div id= "filepath" class= "filepath">Filename </div>
+          
+          <div id = "perms" class= "perms">Permissions</div>
+          <div id = "mod-date" class= "mod-date">Date Modified</div>
+          <div id = "file-size" class= "file-size">Size</div>    
         </div>
       </div>
-      
-      <div class="fourth-row">
-      
-      </div>
+      <button class="save-button">
+        Save Snapshot 
+      </button>
+      <button class="save-button" onclick="addTableElement()">
+        View SnapShots
+      </button>
     </div>
     <script src="../scripts/directories.js"></script>
   </body>
