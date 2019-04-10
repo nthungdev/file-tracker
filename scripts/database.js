@@ -1,44 +1,183 @@
 var sqlite3 = require("sqlite3").verbose();
-var db = new sqlite3.Database(":memory:");
 
-// db.serialize(function() {
-//   db.run(`
-//   CREATE TABLE Snapshots (
-//     fileName string NOT NULL,
-//     filePath string NOT NULL,
-//     mod string NOT NULL,
-//     uid string NOT NULL,
-//     gid string NOT NULL,
-//     size integer NOT NULL,
-//     lastAccess real NOT NULL,
-//     lastModified real NOT NULL,
-//     creationDate real NOT NULL,
-//     snapshotDate real NOT NULL,
-//     PRIMARY KEY (creationDate, fileName)
-// )`);
+const createTable = () => {
+  let db = new sqlite3.Database("database.db");
+  db.serialize(() => {
+    db.run(`
+        CREATE TABLE IF NOT EXISTS Snapshots (
+        fileName string NOT NULL,
+        filePath string NOT NULL,
+        mod string NOT NULL,
+        uid string NOT NULL,
+        gid string NOT NULL,
+        size integer NOT NULL,
+        isDirectory boolean NOT NULL,
+        lastAccess integer NOT NULL,
+        lastModified integer NOT NULL,
+        creationDate integer NOT NULL,
+        snapshotDate integer NOT NULL,
+        PRIMARY KEY (creationDate, filePath)
+    )`);
+  });
+  db.close();
+};
 
-//   var stmt = db.prepare(
-//     "INSERT INTO Snapshots VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-//   );
-//   for (var i = 0; i < 1; i++) {
-//     stmt.run(
-//       "scripts",
-//       "C:\\Users\\vuaga\\Desktop\\file-tracker\\scripts",
-//       "0o40777",
-//       0,
-//       0,
-//       4096,
-//       1554781028.6311944,
-//       1554781028.6311944,
-//       1554773175.0183158,
-//       1554781030
-//     );
-//   }
-//   stmt.finalize();
+function insertSnapshotWithFileStats(fileStats, callback) {
+  let db = new sqlite3.Database("database.db");
+  let query = "INSERT INTO Snapshots VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  console.log(1);
+  db.serialize(() => {
+    console.log(2);
+    console.log(fileStats);
+    db.run(
+      query,
+      fileStats.fileName,
+      fileStats.filePath,
+      fileStats.mode,
+      fileStats.uid,
+      fileStats.gid,
+      fileStats.size,
+      fileStats.isDirectory,
+      fileStats.atimeMs,
+      fileStats.mtimeMs,
+      fileStats.birthtimeMs,
+      Date.now()
+    );
+    console.log(3);
+    // callback();
+  });
+  db.close();
+}
 
-db.each("SELECT * FROM Snapshots", function(err, row) {
-  console.log(row.id + ": " + row.info);
-});
+function insertSnapshot(
+  fileName,
+  filePath,
+  mod,
+  uid,
+  gid,
+  size,
+  isDirectory,
+  lastAccess,
+  lastModified,
+  creationDate,
+  callback = () => {}
+) {
+  let db = new sqlite3.Database("database.db");
+  let query = "INSERT INTO Snapshots VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  db.serialize(() => {
+    db.run(
+      query,
+      fileName,
+      filePath,
+      mod,
+      uid,
+      gid,
+      size,
+      isDirectory,
+      lastAccess,
+      lastModified,
+      creationDate,
+      Date.now(),
+      err => {
+        if (err) {
+          console.log(err);
+        }
+        // console.log(callback);
+        callback();
+      }
+    );
+  });
+  db.close();
+}
+
+function getAllSnapshots(callback) {
+  let db = new sqlite3.Database("database.db");
+  let query = "SELECT * FROM Snapshots";
+  db.serialize(() => {
+    db.all(query, (err, rows) => {
+      if (err) {
+        console.log(err);
+      }
+      callback(rows);
+    });
+  });
+
+  db.close();
+}
+
+const getSnapshotInDir = (path, callback) => {
+  let db = new sqlite3.Database("database.db");
+  let newPath = path + "\\%";
+  let query = "SELECT * FROM Snapshots WHERE filePath LIKE ?";
+  db.serialize(() => {
+    db.all(query, newPath, (err, rows) => {
+      if (err) {
+        console.log(err);
+      }
+      callback(rows);
+    });
+  });
+
+  db.close();
+};
+
+const convertToList = (fileName, filePath, statsObject) => {
+  result = [
+    fileName,
+    filePath,
+    statsObject.mode,
+    statsObject.uid,
+    statsObject.gid,
+    statsObject.size,
+    statsObject.isDirectory,
+    statsObject.atimeMs,
+    statsObject.mtimeMs,
+    statsObject.birthtimeMs,
+    statsObject.snapshotDate
+  ];
+  return result;
+};
+
+createTable();
+
+// insertSnapshotWithFileStats({
+//   fileName: "package-lock.json",
+//   filePath: "C:\\Users\\vuaga\\Desktop\\file-tracker\\package-lock.json",
+//   mode: 33206,
+//   uid: 0,
+//   gid: 0,
+//   size: 60167,
+//   isDirectory: false,
+//   atimeMs: Date.now(),
+//   mtimeMs: Date.now(),
+//   birthtimeMs: Date.now()
 // });
 
-db.close();
+// insertSnapshot(
+//   "package-lock.json",
+//   "C:\\Users\\vuaga\\Desktop\\file-tracker\\package-lock.json",
+//   33206,
+//   0,
+//   0,
+//   60167,
+//   false,
+//   Date.now(),
+//   Date.now(),
+//   Date.now(),
+//   () => {
+//     getAllSnapshots(rows => console.log(rows));
+//   }
+// );
+
+// getAllSnapshot(rows => {
+//   console.log(rows);
+// });
+
+export {
+  insertSnapshotWithFileStats,
+  convertToList,
+  createTable,
+  insertSnapshot,
+  getAllSnapshots,
+  getSnapshotInDir
+};
