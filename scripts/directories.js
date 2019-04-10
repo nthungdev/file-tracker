@@ -204,10 +204,11 @@ function addTableElement(file) {
   }</div></div>`;
   document.getElementById("third-row").appendChild(fileElement);
 }
-// export {
-//   getFileStats,
-//   getFileStatsInDir,
-//   getFilePathsInDir,
-//   scanDirs,
-//   dirPath
-// };
+
+export {
+  getFileStats,
+  getFileStatsInDir,
+  getFilePathsInDir,
+  scanDirs,
+  dirPath
+};
