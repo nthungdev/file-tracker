@@ -97,9 +97,11 @@ function loadCurrentMedata() {
     console.log(4);
     console.log("folderPath: " + folderPath);
     let fileStats = dir.getFileStatsInDir(folderPath);
+    let filePaths = dir.getFilePathsInDir(folderPath);
 
     let trackedFiles = []
     let unTrackedFiles = []
+
 
     fileStats.forEach(file => {
       if()
