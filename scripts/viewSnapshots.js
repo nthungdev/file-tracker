@@ -46,7 +46,7 @@ function viewAllSnapshot() {
 
 function loadSavedSnapshots(calback = () => {}) {
   console.log("loadSavedSnapshots");
-  let ids = ["fileName", "filePath", "size", "mtimeMs", "atimeMs", "mod"];
+  let ids = ["fileName", "filePath", "size", "mtimeMs", "atimeMs", "mode"];
 
   if (folderPath) {
     console.log(4);
@@ -81,10 +81,12 @@ function loadSavedSnapshots(calback = () => {}) {
                 element.appendChild(
                   createRowData(new Date(savedFileStats[id]))
                 );
-              } else if (id === mod) {
+              } else if (id === "mode") {
                 // not sure if it need conversion or not. but the line below doesn't work
                 // element.appendChild(createRowData(row[id].toString(radix)));
-                element.appendChild(createRowData(savedFileStats[id]));
+                element.appendChild(
+                  createRowData((savedFileStats[id] & 0o777).toString(8))
+                );
               } else {
                 element.appendChild(createRowData(savedFileStats[id]));
               }
@@ -99,7 +101,7 @@ function loadSavedSnapshots(calback = () => {}) {
 
 function loadCurrentMetadata() {
   console.log("loadCurrentMedata");
-  let ids = ["fileName", "filePath", "size", "mtimeMs", "atimeMs", "mod"];
+  let ids = ["fileName", "filePath", "size", "mtimeMs", "atimeMs", "mode"];
 
   // console.log("savedFileStats");
   // console.log(savedFileStats);
@@ -136,27 +138,6 @@ function loadCurrentMetadata() {
       }
     });
 
-    // filePaths.forEach(path => {
-    //   // console.log("savedFileStats");
-    //   // console.log(savedFileStats);
-    //   // console.log("path: ");
-    //   // console.log(path);
-    //   let fileStat = savedFileStats.filter(stat => stat.filePath === path);
-    //   console.log("fileStat: ");
-    //   console.log(fileStat);
-    //   if (fileStat.length !== 0) {
-    //     // let tempPaths = temp.map(temp => temp.filePath);
-    //     // trackedFiles = trackedFiles.concat(tempPaths);
-    //     trackedFiles.push(fileStat[0]);
-    //   } else {
-    //     console.log("this fileStat is undefined: ");
-    //     // console.log(fileStat);
-    //     // console.log("path: ");
-    //     // console.log(path);
-    //     trackedFiles.push(dir.getFileStats(path));
-    //   }
-    // });
-
     console.log("trackedFiles");
     console.log(trackedFiles);
     console.log("unTrackedFiles");
@@ -171,10 +152,10 @@ function loadCurrentMetadata() {
           // console.log(element);
           if (id.includes("timeMs")) {
             element.appendChild(createRowData(new Date(row[id])));
-          } else if (id === mod) {
+          } else if (id === "mode") {
             // not sure if it need conversion or not. but the line below doesn't work
             // element.appendChild(createRowData(row[id].toString(radix)));
-            element.appendChild(createRowData(row[id]));
+            element.appendChild(createRowData((row[id] & 0o777).toString(8)));
           } else {
             element.appendChild(createRowData(row[id]));
           }
@@ -191,10 +172,10 @@ function loadCurrentMetadata() {
           // console.log(element);
           if (id.includes("timeMs")) {
             element.appendChild(createRowData(new Date(row[id])));
-          } else if (id === mod) {
+          } else if (id === "mode") {
             // not sure if it need conversion or not. but the line below doesn't work
             // element.appendChild(createRowData(row[id].toString(radix)));
-            element.appendChild(createRowData(row[id]));
+            element.appendChild(createRowData((row[id] & 0o777).toString(8)));
           } else {
             element.appendChild(createRowData(row[id]));
           }

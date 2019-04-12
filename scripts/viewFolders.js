@@ -20,11 +20,19 @@ function addTableElement(file) {
 }
 
 function loadMetadata() {
-  scanDirs();
+  if (folderPathElement.getAttribute("value") == "Select a directory") {
+    showAlert();
+  } else {
+    scanDirs();
+  }
 }
 
 function loadMetadataSub() {
-  scanDirs(true);
+  if (folderPathElement.getAttribute("value") == "Select a directory") {
+    showAlert();
+  } else {
+    scanDirs(true);
+  }
 }
 
 function scanDirs(checkSubdirectories = false) {
@@ -86,4 +94,18 @@ function showAllSnapshots() {
   db.getAllSnapshots(rows => {
     console.log(rows);
   });
+}
+
+function showAlert() {
+  const alertBox = document.querySelector(".viewFolders--alert");
+  // alertBox.classList.remove("viewFolders--alert_show");
+  alertBox.classList.add("viewFolders--alert_show");
+
+  // After 4 seconds, remove the show class from div
+  setTimeout(function() {
+    alertBox.className = alertBox.className.replace(
+      "viewFolders--alert_show",
+      ""
+    );
+  }, 3000);
 }

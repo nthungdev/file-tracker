@@ -3,6 +3,8 @@
     "Helvetica Neue", Arial, sans-serif;
   font-style: normal;
   font-variant: normal;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -166,3 +168,46 @@ input[type="text"]:disabled {
 
   background-color: black;
 } */
+
+.viewFolders--alert {
+  visibility: hidden;
+  position: fixed;
+  bottom: 100px;
+  margin: 0 auto;
+  left: 50%;
+  margin-left: -150px;
+
+  width: 300px;
+  border: 0.5px solid rgba(0, 0, 0, 0.231);
+  /* border-radius: 40px; */
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+}
+
+.viewFolders--alert_show {
+  visibility: visible;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 100px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 100px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}

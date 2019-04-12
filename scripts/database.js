@@ -7,7 +7,7 @@ const createTable = () => {
         CREATE TABLE IF NOT EXISTS Snapshots (
         fileName string NOT NULL,
         filePath string NOT NULL,
-        mod string NOT NULL,
+        mode string NOT NULL,
         uid string NOT NULL,
         gid string NOT NULL,
         size integer NOT NULL,
@@ -56,7 +56,7 @@ function insertSnapshotWithFileStats(fileStats, callback = () => {}) {
 function insertSnapshot(
   fileName,
   filePath,
-  mod,
+  mode,
   uid,
   gid,
   size,
@@ -73,7 +73,7 @@ function insertSnapshot(
       query,
       fileName,
       filePath,
-      mod,
+      mode,
       uid,
       gid,
       size,
