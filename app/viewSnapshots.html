@@ -10,9 +10,8 @@
   </head>
   <body>
     <div class="viewSnapshots">
-      <h1>Snapshots</h1>
-
-      <button onclick="viewAllSnapshot()"></button>
+      <!-- <h1>Snapshots</h1> -->
+      <!-- <button onclick="showAllSnapshots()">Show all snapshot</button> -->
 
       <div class="viewSnapshots--pathBar">
         <a href="viewFolders.html">
@@ -26,7 +25,7 @@
       </div>
 
       <div class="viewSnapshots--stats-title">
-        <h2>Recently saved snapshot</h2>
+        <h2>Last saved snapshots</h2>
         <h2>Current medadata</h2>
       </div>
 
@@ -85,17 +84,17 @@
               <p class="viewSnapshots--stats-snapshots-section-column-data"></p>
             </div>
           </div>
-          <div class="viewSnapshots--stats-snapshots-section">
+          <div id="size" class="viewSnapshots--stats-snapshots-section">
             <p class="viewSnapshots--stats-snapshots-section-header">
-              File name
+              Size
             </p>
             <div class="viewSnapshots--stats-snapshots-section-column">
               <p class="viewSnapshots--stats-snapshots-section-column-data"></p>
             </div>
           </div>
-          <div class="viewSnapshots--stats-snapshots-section">
+          <div id="mtimeMs" class="viewSnapshots--stats-snapshots-section">
             <p class="viewSnapshots--stats-snapshots-section-header">
-              File name
+              Last modified time
             </p>
             <div class="viewSnapshots--stats-snapshots-section-column"></div>
           </div>
@@ -105,13 +104,13 @@
             </p>
             <div class="viewSnapshots--stats-snapshots-section-column"></div>
           </div>
-          <div class="viewSnapshots--stats-snapshots-section">
+          <div id="atimeMs" class="viewSnapshots--stats-snapshots-section">
             <p class="viewSnapshots--stats-snapshots-section-header">
               Last accessed time
             </p>
             <div class="viewSnapshots--stats-snapshots-section-column"></div>
           </div>
-          <div class="viewSnapshots--stats-snapshots-section">
+          <div id="mod" class="viewSnapshots--stats-snapshots-section">
             <p class="viewSnapshots--stats-snapshots-section-header">
               Permission
             </p>

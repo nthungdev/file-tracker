@@ -34,6 +34,15 @@
         <button onclick="loadMetadataSub()" class="list-button">
           List Sub-Directories as well
         </button>
+        <button class="list-button save-button" onclick="saveSnapshot()">
+          Save Snapshot
+        </button>
+        <a href="./viewSnapshots.html">
+          <button class="list-button save-button" id="viewSnapshotsButton">
+            View Snapshots
+          </button>
+        </a>
+        <!-- <button onclick="showAllSnapshots()">Show all snapshot</button> -->
       </div>
 
       <div id="third-row" class="third-row">
@@ -45,14 +54,6 @@
           <div id="file-size" class="file-size">Size (in bytes)</div>
         </div>
       </div>
-      <button class="save-button" onclick="saveSnapshot()">
-        Save Snapshot
-      </button>
-      <a href="./viewSnapshots.html">
-        <button class="save-button" id="viewSnapshotsButton">
-          View Snapshots
-        </button>
-      </a>
     </div>
     <script type="text/javascript" src="../scripts/viewFolders.js"></script>
   </body>

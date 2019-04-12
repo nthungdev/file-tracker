@@ -72,12 +72,18 @@ function dirPath() {
 function saveSnapshot() {
   let folderPath = folderPathElement.getAttribute("value");
 
-  console.log(folderPath);
+  // console.log(folderPath);
   if (!folderPath) return;
 
   const fileStats = dir.getFileStatsInDir(folderPath);
   fileStats.forEach(item => {
-    console.log(item);
+    // console.log(item);
     db.insertSnapshotWithFileStats(item);
+  });
+}
+
+function showAllSnapshots() {
+  db.getAllSnapshots(rows => {
+    console.log(rows);
   });
 }

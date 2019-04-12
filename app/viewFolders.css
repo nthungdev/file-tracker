@@ -54,6 +54,12 @@ input[type="text"]:disabled {
   cursor: pointer;
 }
 
+/* .second-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
 .list-button {
   cursor: pointer;
   outline: none;
@@ -61,7 +67,7 @@ input[type="text"]:disabled {
   border: none;
   background-color: #3ad29f;
   padding: 10px 15px;
-  top: 50%;
+  /* top: 50%; */
   transform: translateY(-50%);
   border-radius: 30px;
   -webkit-box-shadow: 3px 3px 99px rgba(55, 150, 244, 0.3);
@@ -84,8 +90,19 @@ input[type="text"]:disabled {
   overflow-y: scroll;
 }
 
+/* .third-row::-webkit-scrollbar-track {
+  border-radius: 5px;
+  /* background-color: black;
+  color: white;
+} */
+
+/* .third-row::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  /* background-color: black;
+  color: white;
+} */
+
 .save-button {
-  margin: 15px 0px 0px 900px;
   border: none;
   background-color: #3ad29f;
   padding: 10px 15px;
