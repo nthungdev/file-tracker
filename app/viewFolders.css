@@ -83,7 +83,7 @@ input[type="text"]:disabled {
   border-radius: 5px;
   display: grid;
   margin: auto;
-  width: 1000px;
+  width: 1200px;
   height: 60vh;
   background-color: white;
   -webkit-box-shadow: 3px 3px 99px rgba(55, 150, 244, 0.3);
@@ -127,7 +127,7 @@ input[type="text"]:disabled {
 
 .filepath {
   text-align: left;
-  width: 300px;
+  width: 500px;
   overflow-x: auto;
 }
 
@@ -155,7 +155,7 @@ input[type="text"]:disabled {
 }
 
 .third-row .file-entries:nth-child(2n + 2) {
-  background-color: #3ad29f;
+  background-color: #cccccc;
 }
 /* 
 .divider {

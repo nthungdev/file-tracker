@@ -1,5 +1,8 @@
 var sqlite3 = require("sqlite3").verbose();
 
+/**
+ * Create a table to store file metadata
+ */
 const createTable = () => {
   let db = new sqlite3.Database("./database.db");
   db.serialize(() => {
@@ -23,6 +26,11 @@ const createTable = () => {
 };
 
 /// Use getFileStatsInDir() to get list of FileStats
+/**
+ *
+ * @param {*} fileStats
+ * @param {*} callback
+ */
 function insertSnapshotWithFileStats(fileStats, callback = () => {}) {
   let db = new sqlite3.Database("database.db");
   let query = "INSERT INTO Snapshots VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -53,6 +61,21 @@ function insertSnapshotWithFileStats(fileStats, callback = () => {}) {
   db.close();
 }
 
+/**
+ *
+ * @param {String} fileName               Name of the file
+ * @param {String} filePath               Path of the file
+ * @param {Number} mode                   Permissions of the file
+ * @param {Number} uid                    Owning User ID of the file
+ * @param {Number} gid                    Owning Group ID of the file
+ * @param {Number} size                   Size of the file
+ * @param {boolean} isDirectory           Is the file a directory?
+ * @param {Number} lastAccess             Last access time of the file
+ * @param {Number} lastModified           Last modified time of the file
+ * @param {Number} creationDate           The time of creation for the file
+ *
+ * The function adds the metadata of the file into the database
+ */
 function insertSnapshot(
   fileName,
   filePath,
@@ -94,6 +117,10 @@ function insertSnapshot(
   db.close();
 }
 
+/**
+ *
+ * @param {*} callback
+ */
 function getAllSnapshots(callback) {
   let db = new sqlite3.Database("database.db");
   let query = "SELECT * FROM Snapshots";
@@ -125,6 +152,13 @@ const getSnapshotInDir = (path, callback = rows => {}) => {
   db.close();
 };
 
+/**
+ *
+ * @param {String} fileName The name of the file
+ * @param {String} filePath The path of the file
+ * @param {Object} statsObject The meta data of the file in an object format
+ * @return result The array of the file data
+ */
 const convertToList = (fileName, filePath, statsObject) => {
   result = [
     fileName,
