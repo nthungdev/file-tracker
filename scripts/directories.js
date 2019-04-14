@@ -43,7 +43,7 @@ function getFilePathsInDir(path, searchInSubdirectories = false) {
 
   files = fs.readdirSync(path);
   for (var i = 0; i < files.length; i++) {
-    let filePath = path + "/" + files[i];
+    let filePath = path + "\\" + files[i];
 
     // console.log(filePath);
     filePaths.push(filePath);

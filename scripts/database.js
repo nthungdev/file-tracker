@@ -7,7 +7,7 @@ const createTable = () => {
         CREATE TABLE IF NOT EXISTS Snapshots (
         fileName string NOT NULL,
         filePath string NOT NULL,
-        mod string NOT NULL,
+        mode string NOT NULL,
         uid string NOT NULL,
         gid string NOT NULL,
         size integer NOT NULL,
@@ -23,13 +23,17 @@ const createTable = () => {
 };
 
 /// Use getFileStatsInDir() to get list of FileStats
-function insertSnapshotWithFileStats(fileStats, callback) {
+function insertSnapshotWithFileStats(fileStats, callback = () => {}) {
   let db = new sqlite3.Database("database.db");
   let query = "INSERT INTO Snapshots VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  let deleteQuery = "DELETE FROM Snapshots WHERE filePath = ?";
   console.log(1);
   db.serialize(() => {
     console.log(2);
     console.log(fileStats);
+
+    db.run(deleteQuery, fileStats.filePath);
+
     db.run(
       query,
       fileStats.fileName,
@@ -44,8 +48,7 @@ function insertSnapshotWithFileStats(fileStats, callback) {
       fileStats.birthtimeMs,
       Date.now()
     );
-    console.log(3);
-    // callback();
+    callback();
   });
   db.close();
 }
@@ -53,7 +56,7 @@ function insertSnapshotWithFileStats(fileStats, callback) {
 function insertSnapshot(
   fileName,
   filePath,
-  mod,
+  mode,
   uid,
   gid,
   size,
@@ -70,7 +73,7 @@ function insertSnapshot(
       query,
       fileName,
       filePath,
-      mod,
+      mode,
       uid,
       gid,
       size,
