@@ -73,8 +73,8 @@ function clearTable() {
 /**
  *
  * @param {boolean} checkSubdirectories The switch for checking the subdirectories or not
- * @see loadMetaDataSub for @see checkSubdirectories true
- * @see loadMetaData for @see checkSubdirectories true
+ * @see loadMetaDataSub for checkSubdirectories true
+ * @see loadMetaData for checkSubdirectories false
  *
  * Then it uses the fs (file system node module) to fetch the metadata of the
  * files in the Directory and Subdirectories acc to checkSubDirectories
@@ -154,11 +154,11 @@ function saveSnapshot() {
 /**
  * This function logs the data fetched from the database
  */
-function showAllSnapshots() {
-  db.getAllSnapshots(rows => {
-    console.log(rows);
-  });
-}
+// function showAllSnapshots() {
+//   db.getAllSnapshots(rows => {
+//     console.log(rows);
+//   });
+// }
 
 /**
  * Shows an alert box asking the user to specify a directory path

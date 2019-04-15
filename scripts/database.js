@@ -28,8 +28,10 @@ const createTable = () => {
 /// Use getFileStatsInDir() to get list of FileStats
 /**
  *
- * @param {*} fileStats
- * @param {*} callback
+ * @param {object} fileStats The entire file data in an object format
+ * @param {function} callback
+ *
+ * The function adds the metadata of the file into the database
  */
 function insertSnapshotWithFileStats(fileStats, callback = () => {}) {
   let db = new sqlite3.Database("database.db");
@@ -119,7 +121,7 @@ function insertSnapshot(
 
 /**
  *
- * @param {*} callback
+ * @param {function} callback
  */
 function getAllSnapshots(callback) {
   let db = new sqlite3.Database("database.db");
@@ -136,6 +138,12 @@ function getAllSnapshots(callback) {
   db.close();
 }
 
+/**
+ *
+ * @param {String} path The path of the file
+ * @param {function} callback Function to run after data is received
+ *
+ */
 const getSnapshotInDir = (path, callback = rows => {}) => {
   let db = new sqlite3.Database("database.db");
   let newPath = path + "%";
