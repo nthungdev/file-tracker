@@ -35,9 +35,15 @@ app.on("ready", () => {
   setApplicationMenu();
 
   const mainWindow = createWindow("main", {
+<<<<<<< HEAD
     width: 1280,
     height: 720,
     icon: "../app/assets/icon.ico"
+=======
+    width: 1000,
+    height: 600,
+    icon: "./app/assets/icon.ico"
+>>>>>>> 4d23f26a981935f02b6b7837e91ff280aad0b33d
   });
 
   mainWindow.loadURL(
