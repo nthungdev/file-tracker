@@ -201,6 +201,7 @@ function loadCurrentMetadata() {
  */
 function createRowData(data) {
   var node = document.createElement("P");
+  node.className = "viewSnapshots--stats-snapshots-section-column-data";
   node.innerHTML = data;
   return node;
 }

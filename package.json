@@ -1,11 +1,11 @@
 {
   "name": "electron-boilerplate",
-  "productName": "Electron Boilerplate",
-  "description": "Starter for your Electron application",
+  "productName": "File Tracker",
+  "description": "A file tracking electron app to keep track of your files and check if any files were tampered with. The app can help you track the last modified date, the last access date and such.",
   "version": "0.0.0",
   "private": true,
-  "author": "Mr. Gumby <mr.gumby@example.com>",
-  "copyright": "© 2017, Gumby inc.",
+  "author": "Hung Nguyen <nthungdev@gmail.com> & Swornim Barahi <swornimbarahi@gmail.com>",
+  "copyright": "© 2017, Hung Nguyen & Swornim Barahi",
   "homepage": "http://example.com",
   "main": "app/background.js",
   "build": {
@@ -17,6 +17,23 @@
     ],
     "directories": {
       "buildResources": "resources"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": true,
+      "createDesktopShortcut": true,
+      "installerIcon": "app/assets/icon.ico",
+      "uninstallerIcon": "app/assets/icon.ico",
+      "uninstallDisplayName": "Uninstall LIMS",
+      "license": "EULA"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "app/assets/icon.ico",
+      "publisherName": "SH"
     },
     "publish": null
   },

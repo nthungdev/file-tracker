@@ -103,6 +103,15 @@ a:visited {
   text-overflow: clip;
 }
 
+.viewSnapshots--stats-snapshots-section-column-data:nth-child(odd) {
+  background-color: #cccccc;
+}
+
+.viewSnapshots--stats-snapshots
+  .viewSnapshots--stats-snapshots-section-column-data:nth-child(odd) {
+  background-color: white;
+}
+
 .viewSnapshots--stats-snapshots-section p {
   /* height: 20px; */
 }

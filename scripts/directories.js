@@ -152,7 +152,6 @@ module.exports = {
   getFileStats,
   getFileStatsInDir,
   getFilePathsInDir,
-  scanDirs,
   dirPath,
   getFileCredentials
 };
