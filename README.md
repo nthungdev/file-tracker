@@ -1,23 +1,71 @@
-# electron-boilerplate
+# File-tracker
 
-A minimalistic boilerplate for [Electron runtime](http://electron.atom.io). Tested on Windows, macOS and Linux.  
+A file tracking electron app to keep track of your files and check if any files were tampered with. The app can help you track the last modified date, the last access date and such. This app was created with the help of Electron.js. Electron.js is a node module that is used to make cross platform GUI applications with the help of HTML and CSS.
 
-This project contains only bare minimum of tooling and dependencies to provide you with simple to understand and extensible base (but still, this is fully functional Electron environment). The boilerplate also doesn't impose on you any frontend technologies, so feel free to pick your favourite.
+#
 
-# Quick start
+#
 
-Make sure you have [Node.js](https://nodejs.org) installed, then type the following commands known to every Node developer...
+## Running Instructions
+
+### File Explorer Open Help
+
+- Open the File-tracker folder.
+- Double click on the file-tracker.exe file.
+
+### Command Line Open Help
+
 ```
-git clone https://github.com/szwacz/electron-boilerplate.git
-cd electron-boilerplate
+cd file-tracker
+file-tracker.exe
+```
+
+# How to basics in file-tracker
+
+> This is intended to provide knowledge on how to properly use file-tracker.
+
+After clicking on the Let's get started button. A different screen will appear.
+In this screen, there is are five buttons and one table:
+
+#### Buttons
+
+1. `Select Directory` - which lets you choose the folder and it's contents to track.
+2. `List Primary Files only` - which lists the primary files and directories in the selected directory.
+3. `List Sub-Directories as well` - which lists the primary as well as the sub-directories of those files, if they exist.
+4. `Save Snapshot` - which saves the data from the selected directory for future detection purposes.
+5. `View Snapshots` - which redirects you to a page where you can compare the last snapshot with the current snapshot.
+
+#### Table
+
+- `File Data Box` - A box where you can monitor quickly the metadata of the files in the selected directory. The box gets its contents after List Primary Files is pressed or after List Sub Directories is pressed.
+
+### Snapshot Screen
+
+There are 3 main elements in the Snapshot screen.
+
+1. `file path` - This will hold the filepath if selected before coming to this screen.
+2. `Last Saved Snapshot` - This will hold the data from the last saved snapshot, if any.
+3. `Current metadata` - This field will hold the metadata of the files in the directory specified by the filepath.
+
+# Quick start to development
+
+Make sure you have [Node.js](https://nodejs.org) installed, then type the following in a command line...
+
+```
+git clone https://github.com/nthungdev/file-tracker.git
+cd file-tracker
 npm install
+npm run postinstall
 npm start
 ```
+
 ...and you have a running desktop application on your screen.
 
 # Structure of the project
 
 The application consists of two main folders...
+
+`scripts` - files within this folder handle functionality related to the original purpose of file-tracker. (For eg. File MetaData Fetching, Database Management, Adding items to the DOM)
 
 `src` - files within this folder get transpiled or compiled (because Electron can't use them directly).
 
@@ -33,9 +81,13 @@ The drawback of this design is that `app` folder contains some files which shoul
 
 ## Starting the app
 
+Make sure you are in the directory that contains the package.json and the package-lock.json files. Then...
+
 ```
 npm start
 ```
+
+... in your command line.
 
 ## The build pipeline
 
@@ -46,6 +98,7 @@ Build process uses [Webpack](https://webpack.js.org/). The entry-points are `src
 ## Environments
 
 Environmental variables are done in a bit different way (not via `process.env`). Env files are plain JSONs in `config` directory, and build process dynamically links one of them as an `env` module. You can import it wherever in code you need access to the environment.
+
 ```js
 import env from "env";
 console.log(env.name);
@@ -54,22 +107,25 @@ console.log(env.name);
 ## Upgrading Electron version
 
 To do so edit `package.json`:
+
 ```json
 "devDependencies": {
   "electron": "2.0.2"
 }
 ```
-*Side note:* [Electron authors recommend](http://electron.atom.io/docs/tutorial/electron-versioning/) to use fixed version here.
+
+_Side note:_ [Electron authors recommend](http://electron.atom.io/docs/tutorial/electron-versioning/) to use fixed version here.
 
 ## Adding npm modules to your app
 
 Remember to respect the split between `dependencies` and `devDependencies` in `package.json` file. Your distributable app will contain modules listed in `dependencies` after running the release script.
 
-*Side note:* If the module you want to use in your app is a native one (not pure JavaScript but compiled binary) you should first  run `npm install name_of_npm_module` and then `npm run postinstall` to rebuild the module for Electron. You need to do this once after you're first time installing the module. Later on, the postinstall script will fire automatically with every `npm install`.
+_Side note:_ If the module you want to use in your app is a native one (not pure JavaScript but compiled binary) you should first run `npm install name_of_npm_module` and then `npm run postinstall` to rebuild the module for Electron. You need to do this once after you're first time installing the module. Later on, the postinstall script will fire automatically with every `npm install`.
 
 # Testing
 
 Run all tests:
+
 ```
 npm test
 ```
@@ -79,6 +135,7 @@ npm test
 ```
 npm run unit
 ```
+
 Using [electron-mocha](https://github.com/jprichardson/electron-mocha) test runner with the [Chai](http://chaijs.com/api/assert/) assertion library. You can put your spec files wherever you want within the `src` directory, just name them with the `.spec.js` extension.
 
 ## End to end
@@ -86,11 +143,13 @@ Using [electron-mocha](https://github.com/jprichardson/electron-mocha) test runn
 ```
 npm run e2e
 ```
+
 Using [Mocha](https://mochajs.org/) and [Spectron](http://electron.atom.io/spectron/). This task will run all files in `e2e` directory with `.e2e.js` extension.
 
 # Making a release
 
 To package your app into an installer use command:
+
 ```
 npm run release
 ```

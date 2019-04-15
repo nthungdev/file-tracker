@@ -7,34 +7,80 @@ const { ipcRenderer } = require("electron");
 const folderPathElement = document.getElementById("demo");
 
 // HANDLERS ///////////////////////////////////////////////////////////////////
+
+/**
+ *
+ * @param {array} file The file's metadata in an array format.
+ * The function adds the contents of the array to the Document Object Model(DOM)
+ */
 function addTableElement(file) {
   let fileElement = document.createElement("DIV");
-  fileElement.innerHTML = `<div class = ${"file-entries"}><div class = ${"filepath"}>${
+  fileElement.className = "file-entries";
+  fileElement.innerHTML = `<div class = ${"filepath"}>${
     file[0]
   }</div><div class = ${"perms"}>${(file[2] & 0o777).toString(
     8
-  )}</div><div class = ${"mod-date"}>${file[6]}</div><div>${
-    file[1]
-  }</div></div>`;
+  )}</div><div class = ${"mod-date"}>${file[6]}</div><div>${file[1]}</div>`;
   document.getElementById("third-row").appendChild(fileElement);
 }
 
+/**
+ * This is a void function that call the function scanDir() to
+ * search through just the primary files.
+ *
+ * The function also gives an alert if the directory path is not selected.
+ */
 function loadMetadata() {
   if (folderPathElement.getAttribute("value") == "Select a directory") {
     showAlert();
   } else {
+    clearTable();
     scanDirs();
   }
 }
 
+/**
+ * This is a void function that call the function scanDir() to
+ * search through just the primary and secondary files(subdirectories).
+ *
+ * The function also gives an alert if the directory path is not selected.
+ */
 function loadMetadataSub() {
   if (folderPathElement.getAttribute("value") == "Select a directory") {
     showAlert();
   } else {
+    clearTable();
     scanDirs(true);
   }
 }
 
+/**
+ * The function clears all the child nodes from the third-row table.
+ * And then adds the table column titles
+ */
+function clearTable() {
+  let parent = document.getElementById("third-row");
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+  let fileElement = document.createElement("DIV");
+  fileElement.className = "file-entries";
+  fileElement.innerHTML = `<div class = ${"filepath"}>Filename</div><div class = ${"perms"}>Permissions</div>
+  <div class = ${"mod-date"}>Date Modified</div><div>Size(in bytes)</div>`;
+  document.getElementById("third-row").appendChild(fileElement);
+}
+
+/**
+ *
+ * @param {boolean} checkSubdirectories The switch for checking the subdirectories or not
+ * @see loadMetaDataSub for @see checkSubdirectories true
+ * @see loadMetaData for @see checkSubdirectories true
+ *
+ * Then it uses the fs (file system node module) to fetch the metadata of the
+ * files in the Directory and Subdirectories acc to checkSubDirectories
+ *
+ * Then the function calls @see addTableElement to pass the metadata in an array format
+ */
 function scanDirs(checkSubdirectories = false) {
   // TODO clear the list before addTableElement
   path = document.getElementById("demo").getAttribute("value");
@@ -61,6 +107,15 @@ function scanDirs(checkSubdirectories = false) {
   });
 }
 
+/**
+ *
+ * @event onChange
+ *
+ * The dirPath is called to set the directory path in any text container when the
+ * input of id inputfile is changed.
+ *
+ * This helps users view the entire filepath
+ */
 function dirPath() {
   //   document.getElementById("demo").innerHTML = document.getElementById(
   //     "inputfile"
@@ -77,6 +132,12 @@ function dirPath() {
   );
 }
 
+/**
+ *
+ * This function saves the metadata of the files in the directory path set in input
+ * of id inputfile.
+ * The function saves the file metadata in a database file.
+ */
 function saveSnapshot() {
   let folderPath = folderPathElement.getAttribute("value");
 
@@ -90,12 +151,18 @@ function saveSnapshot() {
   });
 }
 
+/**
+ * This function logs the data fetched from the database
+ */
 function showAllSnapshots() {
   db.getAllSnapshots(rows => {
     console.log(rows);
   });
 }
 
+/**
+ * Shows an alert box asking the user to specify a directory path
+ */
 function showAlert() {
   const alertBox = document.querySelector(".viewFolders--alert");
   // alertBox.classList.remove("viewFolders--alert_show");
@@ -107,5 +174,5 @@ function showAlert() {
       "viewFolders--alert_show",
       ""
     );
-  }, 3000);
+  }, 4000);
 }

@@ -2,19 +2,27 @@ const db = require("../scripts/database");
 const dir = require("../scripts/directories");
 
 // DOM SELECTORs //////////////////////////////////////////////////////////
-const backButton = document.querySelector("div.viewSnapshots--pathBar-back");
+// const backButton = document.querySelector("div.viewSnapshots--pathBar-back");
 const folderPathElement = document.querySelector(
   "p.viewSnapshots--pathBar-container-folder-path"
 );
 
 // EVENT LISTENERS ////////////////////////////////////////////////////////
-backButton.addEventListener("click", handleBackButton);
+/**
+ * @listens click on the back button
+ */
+// backButton.addEventListener("click", handleBackButton);
 
 // HANDLERS ///////////////////////////////////////////////////////////////
-function handleBackButton(e) {
-  console.log(dir.getFileStats(path));
-}
 
+// function handleBackButton(e) {
+//   console.log(e);
+//   console.log(dir.getFileStats(path));
+// }
+
+/**
+ * @callback @see loadCurrentMetaData
+ */
 ipcRenderer.on("folder-path", (event, arg) => {
   console.log("in view snapshot");
   console.log("folder-path response");
@@ -29,21 +37,18 @@ let folderPath;
 let hasSavedSnapshot;
 let savedFileStats;
 
-console.log(1);
-// db.getAllSnapshots(rows => {
-//   console.log("getAllSnapshots");
-//   console.log(rows);
-// });
-// console.log(2);
-
 function init() {
   ipcRenderer.send("get-folder-path");
 }
 
-function viewAllSnapshot() {
-  db.getAllSnapshots(rows => console.log(rows));
-}
+// function viewAllSnapshot() {
+//   db.getAllSnapshots(rows => console.log(rows));
+// }
 
+/**
+ * Loads the previously saved meta data of the primary files
+ * The files are aligned with the current meta data according to rows
+ */
 function loadSavedSnapshots(calback = () => {}) {
   console.log("loadSavedSnapshots");
   let ids = ["fileName", "filePath", "size", "mtimeMs", "atimeMs", "mode"];
@@ -99,6 +104,11 @@ function loadSavedSnapshots(calback = () => {}) {
   }
 }
 
+/**
+ * Loads the current meta data of the primary files
+ * The old files are loaded first
+ * and the new files are shown at the end
+ */
 function loadCurrentMetadata() {
   console.log("loadCurrentMedata");
   let ids = ["fileName", "filePath", "size", "mtimeMs", "atimeMs", "mode"];
@@ -185,16 +195,20 @@ function loadCurrentMetadata() {
   }
 }
 
+/**
+ *
+ * @param {any} data Data to be added specifically to the snapshot tables in the DOM
+ */
 function createRowData(data) {
   var node = document.createElement("P");
   node.innerHTML = data;
   return node;
 }
 
-function showAllSnapshots() {
-  db.getAllSnapshots(rows => {
-    console.log(rows);
-  });
-}
+// function showAllSnapshots() {
+//   db.getAllSnapshots(rows => {
+//     console.log(rows);
+//   });
+// }
 
 init();
