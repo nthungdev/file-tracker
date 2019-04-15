@@ -25,13 +25,14 @@ const createTable = () => {
   db.close();
 };
 
-/// Use getFileStatsInDir() to get list of FileStats
 /**
- *
+ * Insert a row of file stats into the database
+ * (Use getFileStatsInDir function to get list of FileStats)
  * @param {object} fileStats The entire file data in an object format
- * @param {function} callback
- *
- * The function adds the metadata of the file into the database
+ * @param {() => {}} callback
+ * rows is an array. If the result set is empty, it will be an empty array,
+ * otherwise it will have an object for each result row which in turn
+ * contains the values of that row, like the Database#get function.
  */
 function insertSnapshotWithFileStats(fileStats, callback = () => {}) {
   let db = new sqlite3.Database("database.db");
@@ -64,7 +65,7 @@ function insertSnapshotWithFileStats(fileStats, callback = () => {}) {
 }
 
 /**
- *
+ * Insert a row of file stats into the database
  * @param {String} fileName               Name of the file
  * @param {String} filePath               Path of the file
  * @param {Number} mode                   Permissions of the file
@@ -120,10 +121,13 @@ function insertSnapshot(
 }
 
 /**
- *
- * @param {function} callback
+ * @param {rows => {}} callback
+ * Rows is an array. If the result set is empty, it will be an empty array,
+ * otherwise it will have an object for each result row which in turn
+ * contains the values of that row.
+ * @return get all data from the database
  */
-function getAllSnapshots(callback) {
+function getAllSnapshots(callback = rows => {}) {
   let db = new sqlite3.Database("database.db");
   let query = "SELECT * FROM Snapshots";
   db.serialize(() => {
@@ -139,10 +143,12 @@ function getAllSnapshots(callback) {
 }
 
 /**
- *
- * @param {String} path The path of the file
- * @param {function} callback Function to run after data is received
- *
+ * @param {String} path the absolute path of the folder
+ * @param {rows => {}} callback function to run after data is received
+ * Rows is an array. If the result set is empty, it will be an empty array,
+ * otherwise it will have an object for each result row which in turn
+ * contains the values of that row.
+ * @return all data of files and subdirectories in a folder
  */
 const getSnapshotInDir = (path, callback = rows => {}) => {
   let db = new sqlite3.Database("database.db");
@@ -161,7 +167,6 @@ const getSnapshotInDir = (path, callback = rows => {}) => {
 };
 
 /**
- *
  * @param {String} fileName The name of the file
  * @param {String} filePath The path of the file
  * @param {Object} statsObject The meta data of the file in an object format
