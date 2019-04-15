@@ -6,6 +6,9 @@ var filePath;
 // import { addTableElement } from "./scripts";
 let fs = require("fs");
 
+/**
+ * Puts the selected directory in the input field with id demo
+ */
 function dirPath() {
   document.getElementById("demo").innerHTML = document.getElementById(
     "inputfile"
@@ -24,20 +27,14 @@ function dirPath() {
 //   console.log(arg);
 // });
 
-function scanDirs() {
-  const fs = require("fs");
-  path = document.getElementById("demo").innerHTML;
-  console.log(path);
-  fs.readdir(path, function(err, items) {
-    for (let i = 0; i < items.length; i++) {
-      let file = path + "\\" + items[i];
-      console.log(getFileCredentials(file));
-      addTableElement(getFileCredentials(file));
-    }
-  });
-}
-
-/// Return an array of file path in the directory path
+/**
+ *
+ * @param {String} path The path of the file
+ * @param {boolean} searchInSubdirectories Switch to loop in sub directories as well, defaulted to false
+ * @return array of array of filepath
+ * Loops through all directories and subdirectories if checked
+ * and adds their filepath to the filepaths array
+ */
 function getFilePathsInDir(path, searchInSubdirectories = false) {
   let filePaths = [];
 
@@ -45,16 +42,10 @@ function getFilePathsInDir(path, searchInSubdirectories = false) {
   for (var i = 0; i < files.length; i++) {
     let filePath = path + "\\" + files[i];
 
-    // console.log(filePath);
     filePaths.push(filePath);
 
-    // console.log(getInSubdirectories);
-    // console.log(fs.statSync(filePath).isDirectory());
-
     if (searchInSubdirectories && fs.statSync(filePath).isDirectory()) {
-      // console.log("innerFiles");
       innerFiles = fs.readdirSync(filePath);
-      // console.log(innerFiles);
 
       try {
         for (var j = 0; i < innerFiles.length; j++) {
@@ -71,6 +62,14 @@ function getFilePathsInDir(path, searchInSubdirectories = false) {
   return filePaths;
 }
 
+/**
+ *
+ * @param {String} path The path of the file
+ * @param {boolean} searchInSubdirectories Switch to loop in sub directories as well, defaulted to false
+ * @return array of array of file stat
+ * Loops through all directories and subdirectories if checked
+ * and adds their file metadata to the filestats array
+ */
 function getFileStatsInDir(path, searchInSubdirectories = false) {
   let fileStats = [];
 
@@ -96,7 +95,11 @@ function getFileStatsInDir(path, searchInSubdirectories = false) {
   return fileStats;
 }
 
-// Return the name of the file in the given path
+/**
+ *
+ * @param {String} path The path of the file
+ * @return result the name of the file in the given path
+ */
 function getFileName(path) {
   let result;
   for (let i = path.length; i > -1; i--) {
@@ -108,31 +111,11 @@ function getFileName(path) {
   return result;
 }
 
-// Return the name of the parent folder of the file in the given path
-function getFileParent(path) {
-  let result;
-  for (let i = path.length; i > -1; i--) {
-    if (path[i] === "\\") {
-      result = path.slice(0, i);
-      return result;
-    }
-  }
-  return result;
-}
-
-function getFileNameAndFilePath(path) {
-  let result = [];
-  for (let i = path.length; i > -1; i--) {
-    if (path[i] === "\\") {
-      result.push(path.slice(0, i));
-      result.push(path.slice(i + 1, path.length));
-      return result;
-    }
-  }
-  return result;
-}
-
-/// Return a fileStat object of the file
+/**
+ *
+ * @param {String} path The path of the file
+ * @return a fileStat object of the file using
+ */
 function getFileStats(path) {
   //var path = "C:\\Users\\vuaga\\Desktop\\oshw\\file-tracker";
   return {
@@ -144,50 +127,15 @@ function getFileStats(path) {
   return fs.statSync(path);
 }
 
-function getFilesInDir(path) {
-  let fs = require("fs");
-  console.log(path);
-
-  fs.readdir(path, function(err, items) {
-    for (var i = 0; i < items.length; i++) {
-      var file = path + "/" + items[i];
-
-      console.log("Start: " + file);
-      fs.stat(file, generate_callback(file));
-      fs.stat(file, function(err, stats) {
-        if (stats.isDirectory()) {
-        }
-      });
-    }
-  });
-}
-
-function generate_callback(file) {
-  return function(err, stats) {
-    console.log(file);
-    console.log(stats["size"]);
-  };
-}
-
-// var db = openDatabase("mydb", "1.0", "my first database", 2 * 1024 * 1024);
-// console.log(db);
-path = "C:\\Users\\vuaga\\Desktop";
-path2 =
-  "C:\\Users\\vuaga\\OneDrive - plattsburgh.edu\\PERSONAL\\COLLEGE\\Courses\\CSC433";
-// console.log(getFilePathsInDir(path));
-
-// console.log(getFileStatsInDir(path2, true));
-
-// console.log(getFileStats(path));
-// console.log(getFileNameAndFilePath(path));
-// console.log(getFileName(path));
-// console.log(getFileParent(path));
-// scanDirs();
-
-function getFileCredentials(filename) {
-  const stats = fs.statSync(filename);
+/**
+ *
+ * @param {String} path The path of the file
+ * @return the file metadata in an array format
+ */
+function getFileCredentials(path) {
+  const stats = fs.statSync(path);
   return [
-    filename,
+    path,
     stats.size,
     stats.mode,
     stats.uid,
@@ -200,25 +148,6 @@ function getFileCredentials(filename) {
   ];
 }
 
-function addTableElement(file) {
-  let fileElement = document.createElement("DIV");
-  fileElement.innerHTML = `<div class = ${"file-entries"}><div class = ${"filepath"}>${
-    file[0]
-  }</div><div class = ${"perms"}>${(file[2] & 0o777).toString(
-    8
-  )}</div><div class = ${"mod-date"}>${file[6]}</div><div>${
-    file[1]
-  }</div></div>`;
-  document.getElementById("third-row").appendChild(fileElement);
-}
-
-// export {
-//   getFileStats,
-//   getFileStatsInDir,
-//   getFilePathsInDir,
-//   scanDirs,
-//   dirPath
-// };
 module.exports = {
   getFileStats,
   getFileStatsInDir,

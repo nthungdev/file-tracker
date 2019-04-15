@@ -27,9 +27,9 @@ const createTable = () => {
 
 /**
  * Insert a row of file stats into the database
- * Use getFileStatsInDir function to get list of FileStats
- * @param {*} fileStats
- * @param {*} callback
+ * (Use getFileStatsInDir function to get list of FileStats)
+ * @param {object} fileStats The entire file data in an object format
+ * @param {() => {}} callback
  * rows is an array. If the result set is empty, it will be an empty array,
  * otherwise it will have an object for each result row which in turn
  * contains the values of that row, like the Database#get function.
@@ -144,7 +144,7 @@ function getAllSnapshots(callback = rows => {}) {
 
 /**
  * @param {String} path the absolute path of the folder
- * @param {rows => {}} callback
+ * @param {rows => {}} callback function to run after data is received
  * Rows is an array. If the result set is empty, it will be an empty array,
  * otherwise it will have an object for each result row which in turn
  * contains the values of that row.
