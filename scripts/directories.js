@@ -57,8 +57,6 @@ function getFilePathsInDir(path, searchInSubdirectories = false) {
       }
     }
   }
-
-  console.log(filePaths);
   return filePaths;
 }
 
