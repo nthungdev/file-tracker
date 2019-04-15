@@ -121,11 +121,11 @@ function insertSnapshot(
 }
 
 /**
- * Get all data from the database
  * @param {rows => {}} callback
  * Rows is an array. If the result set is empty, it will be an empty array,
  * otherwise it will have an object for each result row which in turn
  * contains the values of that row.
+ * @return get all data from the database
  */
 function getAllSnapshots(callback = rows => {}) {
   let db = new sqlite3.Database("database.db");
