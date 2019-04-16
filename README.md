@@ -2,23 +2,19 @@
 
 A file tracking electron app to keep track of your files and check if any files were tampered with. The app can help you track the last modified date, the last access date and such. This app was created with the help of Electron.js. Electron.js is a node module that is used to make cross platform GUI applications with the help of HTML and CSS.
 
-#
+# Quick start to development
 
-#
-
-## Running Instructions
-
-### File Explorer Open Help
-
-- Open the File-tracker folder.
-- Double click on the file-tracker.exe file.
-
-### Command Line Open Help
+Make sure you have [Node.js](https://nodejs.org) installed, then type the following in a command line...
 
 ```
+git clone https://github.com/nthungdev/file-tracker.git
 cd file-tracker
-file-tracker.exe
+npm install
+npm run postinstall
+npm start
 ```
+
+...and you have a running desktop application on your screen.
 
 # How to basics in file-tracker
 
@@ -47,20 +43,6 @@ There are 3 main elements in the Snapshot screen.
 2. `Last Saved Snapshot` - This will hold the data from the last saved snapshot, if any.
 3. `Current metadata` - This field will hold the metadata of the files in the directory specified by the filepath.
 
-# Quick start to development
-
-Make sure you have [Node.js](https://nodejs.org) installed, then type the following in a command line...
-
-```
-git clone https://github.com/nthungdev/file-tracker.git
-cd file-tracker
-npm install
-npm run postinstall
-npm start
-```
-
-...and you have a running desktop application on your screen.
-
 # Structure of the project
 
 The application consists of two main folders...
@@ -78,16 +60,6 @@ Treat `src` and `app` folders like two halves of one bigger thing.
 The drawback of this design is that `app` folder contains some files which should be git-ignored and some which shouldn't (see `.gitignore` file). But this two-folders split makes development builds much, much faster.
 
 # Development
-
-## Starting the app
-
-Make sure you are in the directory that contains the package.json and the package-lock.json files. Then...
-
-```
-npm start
-```
-
-... in your command line.
 
 ## The build pipeline
 
@@ -122,27 +94,7 @@ Remember to respect the split between `dependencies` and `devDependencies` in `p
 
 _Side note:_ If the module you want to use in your app is a native one (not pure JavaScript but compiled binary) you should first run `npm install name_of_npm_module` and then `npm run postinstall` to rebuild the module for Electron. You need to do this once after you're first time installing the module. Later on, the postinstall script will fire automatically with every `npm install`.
 
-# Testing
-
-Run all tests:
-
-```
-npm test
-```
-
-## Unit
-
-```
-npm run unit
-```
-
 Using [electron-mocha](https://github.com/jprichardson/electron-mocha) test runner with the [Chai](http://chaijs.com/api/assert/) assertion library. You can put your spec files wherever you want within the `src` directory, just name them with the `.spec.js` extension.
-
-## End to end
-
-```
-npm run e2e
-```
 
 Using [Mocha](https://mochajs.org/) and [Spectron](http://electron.atom.io/spectron/). This task will run all files in `e2e` directory with `.e2e.js` extension.
 
@@ -159,3 +111,7 @@ Once the packaging process finished, the `dist` directory will contain your dist
 We use [electron-builder](https://github.com/electron-userland/electron-builder) to handle the packaging process. It has a lot of [customization options](https://www.electron.build/configuration/configuration), which you can declare under `"build"` key in `package.json`.
 
 You can package your app cross-platform from a single operating system, [electron-builder kind of supports this](https://www.electron.build/multi-platform-build), but there are limitations and asterisks. That's why this boilerplate doesn't do that by default.
+
+## Thanks to...
+
+- Primary inspiration: https://github.com/szwacz/electron-boilerplate
