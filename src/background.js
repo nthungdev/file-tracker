@@ -8,7 +8,8 @@ import url from "url";
 import { app, Menu } from "electron";
 import { devMenuTemplate } from "./menu/dev_menu_template";
 import { editMenuTemplate } from "./menu/edit_menu_template";
-const { ipcMain } = require("electron");
+// const { ipcMain } = require("electron");
+import { ipcMain } from "electron";
 import createWindow from "./helpers/window";
 
 // Special module holding environment variables which you declared

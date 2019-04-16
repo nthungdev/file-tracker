@@ -18,23 +18,6 @@
     "directories": {
       "buildResources": "resources"
     },
-    "nsis": {
-      "oneClick": false,
-      "perMachine": true,
-      "allowElevation": true,
-      "allowToChangeInstallationDirectory": true,
-      "deleteAppDataOnUninstall": true,
-      "createDesktopShortcut": true,
-      "installerIcon": "app/assets/icon.ico",
-      "uninstallerIcon": "app/assets/icon.ico",
-      "uninstallDisplayName": "Uninstall LIMS",
-      "license": "EULA"
-    },
-    "win": {
-      "target": "nsis",
-      "icon": "app/assets/icon.ico",
-      "publisherName": "SH"
-    },
     "publish": null
   },
   "scripts": {
