@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>File Tracker</title>
+    <link rel="stylesheet" href="./viewFolders.css" />
+  </head>
+  <body>
+    <div class="super-container">
+      <div class="first-row">
+        <!-- <div id="demo" class="filepath-container">FilePath...</div> -->
+        <input
+          type="text"
+          id="demo"
+          class="filepath-container"
+          disabled
+          value="Select a directory"
+        />
+        <input
+          type="file"
+          id="inputfile"
+          onchange="dirPath()"
+          webkitdirectory
+          class="select-file-button"
+        />
+        <label for="inputfile" class="fake-select-button"
+          >Select Directory</label
+        >
+      </div>
+
+      <div class="second-row">
+        <button onclick="loadMetadata()" class="list-button">
+          List Primary Files Only
+        </button>
+        <button onclick="loadMetadataSub()" class="list-button">
+          List Sub-Directories as well
+        </button>
+        <button class="list-button save-button" onclick="saveSnapshot()">
+          Save Snapshot
+        </button>
+        <a href="./viewSnapshots.html">
+          <button class="list-button save-button" id="viewSnapshotsButton">
+            View Snapshots
+          </button>
+        </a>
+        <!-- <button onclick="showAllSnapshots()">Show all snapshot</button> -->
+      </div>
+
+      <div id="third-row" class="third-row">
+        <div id="file-entries" class="file-entries">
+          <div id="filepath" class="filepath">Filename</div>
+
+          <div id="perms" class="perms">Permissions</div>
+          <div id="mod-date" class="mod-date">Date Modified</div>
+          <div id="file-size" class="file-size">Size (in bytes)</div>
+        </div>
+      </div>
+
+      <div class="viewFolders--alert">
+        <p>Please select directory path first!</p>
+      </div>
+    </div>
+    <script type="text/javascript" src="../scripts/viewFolders.js"></script>
+  </body>
+</html>
